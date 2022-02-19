@@ -10,6 +10,8 @@ import torch
 import numpy
 import multiprocessing as mp
 
+from progress.bar import Bar
+
 from .sem import ChainEquationModel
 from .models import *
 
@@ -72,6 +74,7 @@ def run_experiment(args):
     all_solutions = []
     all_environments = []
 
+    _bar = Bar("Creating SEMs", max=args["n_reps"])
     for rep_i in range(args["n_reps"]):
         if args["setup_sem"] == "chain":
             sem = ChainEquationModel(
@@ -89,6 +92,8 @@ def run_experiment(args):
 
         all_sems.append(sem)
         all_environments.append(environments)
+        _bar.next()
+    _bar.finish()
 
     for sem, environments in zip(all_sems, all_environments):
         sem_solution, sem_scramble = sem.solution()

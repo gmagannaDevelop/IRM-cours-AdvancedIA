@@ -22,6 +22,7 @@ import scipy.optimize
 import matplotlib
 import matplotlib.pyplot as plt
 
+from progress.bar import Bar
 
 def pretty(vector):
     """used for printing"""
@@ -36,6 +37,12 @@ class InvariantRiskMinimization(object):
         best_reg = 0
         best_err = 1e6
 
+        self._uses_cuda = args["irm_cuda"]
+        if self._uses_cuda and args["verbose"]:
+            print("IRM using cuda")        
+        # if cuda is enabled pass data from all environments to cuda only once
+        self.environments = [(x.data.to("cuda"), y.data.to("cuda")) for x, y in environments] if self._uses_cuda else environments
+
         x_val = environments[-1][0]
         y_val = environments[-1][1]
 
@@ -46,8 +53,10 @@ class InvariantRiskMinimization(object):
             csv_writer.writerow(header)
 
             # Regularise using the last environment, train with all others
-            for reg in [0, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1]:
-                self.train(environments[:-1], args, csv_writer=csv_writer, reg=reg)
+            regs_ls = [0, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1]
+            _reg_bar = Bar("Regularizing", max=len(regs_ls))
+            for reg in regs_ls:
+                self.train(self.environments[:-1], args, csv_writer=csv_writer, reg=reg)
                 err = (x_val @ self.solution() - y_val).pow(2).mean().item()
 
                 if args["verbose"]:
@@ -59,7 +68,9 @@ class InvariantRiskMinimization(object):
                     best_err = err
                     best_reg = reg
                     best_phi = self.phi.clone()
+                _reg_bar.next()
             self.phi = best_phi
+            _reg_bar.finish()
 
     def train(
         self,
@@ -71,9 +82,12 @@ class InvariantRiskMinimization(object):
         """train the IRM model across environments"""
         dim_x = environments[0][0].size(1)
 
-        self.phi = torch.nn.Parameter(torch.eye(dim_x, dim_x))
+        self.phi = torch.nn.Parameter(torch.eye(dim_x, dim_x), requires_grad=True)
         self.w = torch.ones(dim_x, 1)
         self.w.requires_grad = True
+        if self._uses_cuda:
+            self.phi = self.phi.data.to('cuda')
+            self.w = self.w.to('cuda')
 
         opt = torch.optim.Adam([self.phi], lr=args["lr"])
         loss = torch.nn.MSELoss()
@@ -82,6 +96,8 @@ class InvariantRiskMinimization(object):
             penalty = 0
             error = 0
             for x_e, y_e in environments:
+                #x_e = x_e.data.to('cuda')
+                #y_e = y_e.data.to('cuda')
                 error_e = loss(x_e @ self.phi @ self.w, y_e)
                 penalty += grad(error_e, self.w, create_graph=True)[0].pow(2).mean()
                 error += error_e
@@ -92,16 +108,17 @@ class InvariantRiskMinimization(object):
 
             if args["verbose"] and iteration % args["irm_epoch_size"] == 0:
                 csv_writer.writerow([iteration, reg, error.item(), penalty.item()])
-                w_str = pretty(self.solution())
-                print(
-                    "{:05d} | {:.5f} | {:.5f} | {:.5f} | {}".format(
-                        iteration, reg, error, penalty, w_str
-                    )
-                )
+                #w_str = pretty(self.solution())
+                #print(
+                #    "{:05d} | {:.5f} | {:.5f} | {:.5f} | {}".format(
+                #        iteration, reg, error, penalty, w_str
+                #    )
+                #)
 
     def solution(self):
         """Get the coefficients"""
-        return (self.phi @ self.w).view(-1, 1)
+        _coeffs = (self.phi @ self.w).view(-1, 1)
+        return _coeffs.data.to('cpu') if self._uses_cuda else _coeffs
 
 
 class InvariantCausalPrediction(object):

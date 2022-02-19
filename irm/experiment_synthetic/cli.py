@@ -92,13 +92,20 @@ Available commands:
             default=1000,
             help="Number of iterations between each csv train save (int: %(default)d)",
         )
+        parser.add_argument(
+            "--irm_cuda",
+            default=False,
+            action="store_true",
+            help="Wether IRM should be performed on the GPU (bool: %(default)d)",
+        )
         # now that we're inside a subcommand, ignore the first
         # TWO argv s, ie the command and the subcommand
         args = dict(vars(parser.parse_args(sys.argv[2:])))
+        print(f"Parsed irm_cuda = {args['irm_cuda']}")
 
         print(f"Running IRM simulation from params: {args}")
         all_solutions = run_experiment(args)
-        print("\n".join(all_solutions))
+        # print("\n".join(all_solutions))
 
     def from_file(self):
         """Read the configuration params from a config parser."""
@@ -126,7 +133,7 @@ Available commands:
             f"Running IRM simulation from config file {args.config_file} \nwith params:\n {params}"
         )
         all_solutions = run_experiment(args)
-        print("\n".join(all_solutions))
+        # print("\n".join(all_solutions))
 
 
 if __name__ == "__main__":

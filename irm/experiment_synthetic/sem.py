@@ -42,6 +42,7 @@ class ChainEquationModel(object):
             self.whz = torch.zeros(self.dim, self.dim)
 
     def solution(self):
+        """Return the actual solution"""
         w = torch.cat((self.wxy.sum(1), torch.zeros(self.dim))).view(-1, 1)
         return w, self.scramble
 
