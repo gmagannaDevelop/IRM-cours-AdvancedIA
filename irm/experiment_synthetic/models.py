@@ -8,6 +8,7 @@
 import numpy as np
 import torch
 import math
+import csv
 
 from sklearn.linear_model import LinearRegression
 from itertools import chain, combinations
@@ -38,20 +39,35 @@ class InvariantRiskMinimization(object):
         x_val = environments[-1][0]
         y_val = environments[-1][1]
 
-        for reg in [0, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1]:
-            self.train(environments[:-1], args, reg=reg)
-            err = (x_val @ self.solution() - y_val).pow(2).mean().item()
+        # TODO : make this a param
+        with open("irm_record.csv", "w", encoding="utf-8") as _irm_record:
+            csv_writer = csv.writer(_irm_record, delimiter=",")
+            header = "iteration, reg, error, penalty".split(", ")
+            csv_writer.writerow(header)
 
-            if args["verbose"]:
-                print("IRM (reg={:.3f}) has {:.3f} validation error.".format(reg, err))
+            # Regularise using the last environment, train with all others
+            for reg in [0, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1]:
+                self.train(environments[:-1], args, csv_writer=csv_writer, reg=reg)
+                err = (x_val @ self.solution() - y_val).pow(2).mean().item()
 
-            if err < best_err:
-                best_err = err
-                best_reg = reg
-                best_phi = self.phi.clone()
-        self.phi = best_phi
+                if args["verbose"]:
+                    print(
+                        "IRM (reg={:.3f}) has {:.3f} validation error.".format(reg, err)
+                    )
 
-    def train(self, environments, args, reg=0):
+                if err < best_err:
+                    best_err = err
+                    best_reg = reg
+                    best_phi = self.phi.clone()
+            self.phi = best_phi
+
+    def train(
+        self,
+        environments,
+        args,
+        csv_writer,
+        reg=0,
+    ):
         """train the IRM model across environments"""
         dim_x = environments[0][0].size(1)
 
@@ -74,7 +90,8 @@ class InvariantRiskMinimization(object):
             (reg * error + (1 - reg) * penalty).backward()
             opt.step()
 
-            if args["verbose"] and iteration % 1000 == 0:
+            if args["verbose"] and iteration % args["irm_epoch_size"] == 0:
+                csv_writer.writerow([iteration, reg, error.item(), penalty.item()])
                 w_str = pretty(self.solution())
                 print(
                     "{:05d} | {:.5f} | {:.5f} | {:.5f} | {}".format(

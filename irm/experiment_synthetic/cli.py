@@ -86,6 +86,12 @@ Available commands:
         parser.add_argument(
             "--n_threads", type=int, default=mp.cpu_count(), help="(int: %(default)d)"
         )
+        parser.add_argument(
+            "--irm_epoch_size",
+            type=int,
+            default=1000,
+            help="Number of iterations between each csv train save (int: %(default)d)",
+        )
         # now that we're inside a subcommand, ignore the first
         # TWO argv s, ie the command and the subcommand
         args = dict(vars(parser.parse_args(sys.argv[2:])))

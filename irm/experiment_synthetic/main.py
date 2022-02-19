@@ -52,6 +52,7 @@ def run_experiment(args):
             args["setup_scramble"],
         )
     elif args["setup_sem"] == "icp":
+        # WARNING : the setup_str is set but it has not been implemented
         setup_str = "sem_icp"
     else:
         raise NotImplementedError
@@ -97,10 +98,10 @@ def run_experiment(args):
         ]
 
         for method_name, method_constructor in methods.items():
+            # training occurs at instantiation time.
             method = method_constructor(environments, args)
-
+            # the method (Optimisation technique) has been applied so the solution is available
             method_solution = sem_scramble @ method.solution()
-
             err_causal, err_noncausal = errors(sem_solution, method_solution)
 
             solutions.append(
