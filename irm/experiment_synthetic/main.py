@@ -107,9 +107,6 @@ def run_experiment(args):
         _bar.next()
     _bar.finish()
 
-    print(f"all_sems length : {len(all_sems)}")
-    print(f"all_environments : {len(all_environments)}")
-
     # TODO : save parameter estimations
     # For an explanation of the names given to columns, see the article
     # section 5.1 Synthetic Data
@@ -163,7 +160,8 @@ def run_experiment(args):
 
 
 def format_results_df(results_df):
-    """Give the proper formatting to the contents of results_df"""
+    """Give the proper formatting to the contents of results_df
+    !!!!!!!!!WARNING : the formatting happens in_place !!!!!!!"""
     results_df.loc[:, "Coefficients"] = results_df.Coefficients.replace(
         {0: "Random", 1: "Ones"}  # See sem.py for details
     )

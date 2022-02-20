@@ -115,8 +115,7 @@ Available commands:
                 toml.dump(args, _c_f)
 
         print(f"Running IRM simulation from params: {args}")
-        all_solutions = run_experiment(args)
-        # print("\n".join(all_solutions))
+        run_experiment(args)
 
     def from_file(self):
         """Read the configuration params from a config parser."""
@@ -141,8 +140,7 @@ Available commands:
         print(
             f"Running IRM simulation from config file {args.config_file} \nwith params:\n {params}"
         )
-        all_solutions = run_experiment(params)
-        # print("\n".join(all_solutions))
+        run_experiment(params)
 
 
 if __name__ == "__main__":

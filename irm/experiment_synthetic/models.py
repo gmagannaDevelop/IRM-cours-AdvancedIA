@@ -9,6 +9,7 @@ import numpy as np
 import torch
 import math
 import csv
+import datetime as dt
 
 from sklearn.linear_model import LinearRegression
 from itertools import chain, combinations
@@ -55,7 +56,8 @@ class InvariantRiskMinimization(object):
             y_val = self.environments[-1][1]
 
             # TODO : make this a param
-            with open("irm_record.csv", "w", encoding="utf-8") as _irm_record:
+            _config_dest = f"irm_training_{str(dt.datetime.now()).split('.')[0].replace(' ', '_')}.csv"
+            with open(_config_dest, "w", encoding="utf-8") as _irm_record:
                 csv_writer = csv.writer(_irm_record, delimiter=",")
                 header = "iteration, reg, error, penalty".split(", ")
                 csv_writer.writerow(header)
@@ -123,12 +125,6 @@ class InvariantRiskMinimization(object):
 
             if args["verbose"] and iteration % args["irm_epoch_size"] == 0:
                 csv_writer.writerow([iteration, reg, error.item(), penalty.item()])
-                #w_str = pretty(self.solution())
-                #print(
-                #    "{:05d} | {:.5f} | {:.5f} | {:.5f} | {}".format(
-                #        iteration, reg, error, penalty, w_str
-                #    )
-                #)
 
     def solution(self):
         """Get the coefficients, always on cpu"""
