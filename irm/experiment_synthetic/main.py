@@ -127,12 +127,6 @@ def run_experiment(args):
             unit="environment",
         ):
             sem_solution, sem_scramble = sem.solution()
-
-            # print(f"Repetition {j}/{args['n_reps']}")
-            # solutions = [
-            #    "{} SEM {} {:.5f} {:.5f}".format(setup_str, pretty(sem_solution), 0, 0)
-            # ]
-
             for method_name, method_constructor in tqdm(
                 methods.items(), desc="Methods Loop", unit="method"
             ):
@@ -147,16 +141,7 @@ def run_experiment(args):
                 err_causal, err_noncausal = errors(sem_solution, method_solution)
 
                 # TODO : save parameter estimations
-                # with open(f"{method_name}_coefficients.csv"):
-                # solutions.append(
-                #    "{} {} {} {:.5f} {:.5f}".format(
-                #        setup_str,
-                #        method_name,
                 #        pretty(method_solution),
-                #        err_causal,
-                #        err_noncausal,
-                #    )
-                # )
                 results_df.loc[i, :] = (
                     *map(
                         lambda x: x.split("=", maxsplit=1)[-1],
@@ -168,14 +153,13 @@ def run_experiment(args):
                 )
                 i += 1
 
-        # all_solutions += solutions
     except Exception as _e:
         raise _e
     finally:
         _results_dest = f"irm_results_{str(dt.datetime.now()).split('.', maxsplit=1)[0].replace(' ', '_')}.csv"
         results_df.to_csv(_results_dest, index=False)
 
-    return all_solutions
+    return results_df
 
 
 def format_results_df(results_df):
