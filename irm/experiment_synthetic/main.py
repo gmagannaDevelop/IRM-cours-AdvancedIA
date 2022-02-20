@@ -5,15 +5,24 @@
 # LICENSE file in the root directory of this source tree.
 #
 
-import sys
+import datetime as dt
+
 import torch
 import numpy
-import multiprocessing as mp
+import pandas as pd
 
-from progress.bar import Bar
+from progress.spinner import PixelSpinner
+from tqdm import tqdm
 
 from .sem import ChainEquationModel
 from .models import *
+
+_SETUP_STR_SEPARATOR = "|"
+
+
+def vector_to_dict(vector):
+    """Format a vector as dictionary
+    containing a list of values"""
 
 
 def errors(w, w_hat):
@@ -41,13 +50,16 @@ def errors(w, w_hat):
 
 def run_experiment(args):
     """run the experiment"""
+    # Set up the random number generator and threads
     if args["seed"] >= 0:
         torch.manual_seed(args["seed"])
         numpy.random.seed(args["seed"])
         torch.set_num_threads(args["n_threads"])
 
+    # Create a setup string (TODO: modify this)
     if args["setup_sem"] == "chain":
-        setup_str = "chain_ones={}_hidden={}_hetero={}_scramble={}".format(
+        _setup_ls = ["chain_ones={}", "hidden={}", "hetero={}", "scramble={}"]
+        setup_str = _SETUP_STR_SEPARATOR.join(_setup_ls).format(
             args["setup_ones"],
             args["setup_hidden"],
             args["setup_hetero"],
@@ -95,30 +107,89 @@ def run_experiment(args):
         _bar.next()
     _bar.finish()
 
-    for sem, environments in zip(all_sems, all_environments):
-        sem_solution, sem_scramble = sem.solution()
+    print(f"all_sems length : {len(all_sems)}")
+    print(f"all_environments : {len(all_environments)}")
 
-        solutions = [
-            "{} SEM {} {:.5f} {:.5f}".format(setup_str, pretty(sem_solution), 0, 0)
-        ]
+    # TODO : save parameter estimations
+    # For an explanation of the names given to columns, see the article
+    # section 5.1 Synthetic Data
+    results_df = pd.DataFrame(
+        columns="Coefficients,GraphObservation,Dispersion,Scramble,Method,ErrCausal,ErrNonCausal".split(
+            ","
+        ),
+        index=list(range(len(all_sems) * len(methods))),
+    )
+    i = 0
+    try:
+        for sem, environments in tqdm(
+            zip(all_sems, all_environments),
+            desc="Repetitions",
+            unit="environment",
+        ):
+            sem_solution, sem_scramble = sem.solution()
 
-        for method_name, method_constructor in methods.items():
-            # training occurs at instantiation time.
-            method = method_constructor(environments, args)
-            # the method (Optimisation technique) has been applied so the solution is available
-            method_solution = sem_scramble @ method.solution()
-            err_causal, err_noncausal = errors(sem_solution, method_solution)
+            # print(f"Repetition {j}/{args['n_reps']}")
+            # solutions = [
+            #    "{} SEM {} {:.5f} {:.5f}".format(setup_str, pretty(sem_solution), 0, 0)
+            # ]
 
-            solutions.append(
-                "{} {} {} {:.5f} {:.5f}".format(
-                    setup_str,
+            for method_name, method_constructor in tqdm(
+                methods.items(), desc="Methods Loop", unit="method"
+            ):
+                # training occurs at instantiation time.
+                method = method_constructor(environments, args)
+                # the method (Optimisation technique) has been applied so the solution is available
+                solution = method.solution()
+                method_solution = sem_scramble @ solution
+                if args["irm_cuda"] and method_name == "IRM":
+                    del method
+                    torch.cuda.empty_cache()
+                err_causal, err_noncausal = errors(sem_solution, method_solution)
+
+                # TODO : save parameter estimations
+                # with open(f"{method_name}_coefficients.csv"):
+                # solutions.append(
+                #    "{} {} {} {:.5f} {:.5f}".format(
+                #        setup_str,
+                #        method_name,
+                #        pretty(method_solution),
+                #        err_causal,
+                #        err_noncausal,
+                #    )
+                # )
+                results_df.loc[i, :] = (
+                    *map(
+                        lambda x: x.split("=", maxsplit=1)[-1],
+                        setup_str.split(_SETUP_STR_SEPARATOR),
+                    ),
                     method_name,
-                    pretty(method_solution),
                     err_causal,
                     err_noncausal,
                 )
-            )
+                i += 1
 
-        all_solutions += solutions
+        # all_solutions += solutions
+    except Exception as _e:
+        raise _e
+    finally:
+        _results_dest = f"irm_results_{str(dt.datetime.now()).split('.', maxsplit=1)[0].replace(' ', '_')}.csv"
+        results_df.to_csv(_results_dest, index=False)
 
     return all_solutions
+
+
+def format_results_df(results_df):
+    """Give the proper formatting to the contents of results_df"""
+    results_df.loc[:, "Coefficients"] = results_df.Coefficients.replace(
+        {0: "Random", 1: "Ones"}  # See sem.py for details
+    )
+    results_df.loc[:, "GraphObservation"] = results_df.GraphObservation.replace(
+        {0: "F", 1: "P"}  # Full, Partial
+    )
+    results_df.loc[:, "Dispersion"] = results_df.Dispersion.replace(
+        {0: "O", 1: "E"}  # hOmoscedastic, # hEteroscedastic
+    )
+    results_df.loc[:, "Scramble"] = results_df.Scramble.replace(
+        {0: "U", 1: "S"}  # Unscrambled, Scrambled
+    )
+    return results_df

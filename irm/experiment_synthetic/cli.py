@@ -3,9 +3,12 @@
 import argparse
 import sys
 from pathlib import Path
+import datetime as dt
+import multiprocessing as mp
+
 import toml
 
-from .main import run_experiment, mp
+from .main import run_experiment
 
 
 class IRMRunner(object):
@@ -98,10 +101,18 @@ Available commands:
             action="store_true",
             help="Wether IRM should be performed on the GPU (bool: %(default)d)",
         )
+        parser.add_argument("--dump_config", default=False, action="store_true")
         # now that we're inside a subcommand, ignore the first
         # TWO argv s, ie the command and the subcommand
         args = dict(vars(parser.parse_args(sys.argv[2:])))
-        print(f"Parsed irm_cuda = {args['irm_cuda']}")
+
+        if args["dump_config"]:
+            _config_dest = f"irm_config_{str(dt.datetime.now()).split('.')[0].replace(' ', '_')}.toml"
+            if Path(_config_dest).resolve().exists():
+                # avoid overwritting existing config files
+                raise FileExistsError("Config file already exists, aborting")
+            with open(_config_dest, "w", encoding="utf-8") as _c_f:
+                toml.dump(args, _c_f)
 
         print(f"Running IRM simulation from params: {args}")
         all_solutions = run_experiment(args)
@@ -113,7 +124,6 @@ Available commands:
             description="Read a toml configuration file to parse arguments for simulations"
         )
         # NOT prefixing the argument with -- means it's not optional
-        parser.add_argument("config_file")
         parser.add_argument(
             "config_file",
             type=lambda p: Path(p).resolve(),
@@ -123,7 +133,6 @@ Available commands:
             For the parameters' keys and values, run:
                 irm from_params --help
 """,
-            dest="config_file",
         )
         args = parser.parse_args(sys.argv[2:])
         with open(args.config_file, "r", encoding="utf-8") as config:
@@ -132,7 +141,7 @@ Available commands:
         print(
             f"Running IRM simulation from config file {args.config_file} \nwith params:\n {params}"
         )
-        all_solutions = run_experiment(args)
+        all_solutions = run_experiment(params)
         # print("\n".join(all_solutions))
 
 

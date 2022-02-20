@@ -15,6 +15,7 @@ from itertools import chain, combinations
 from scipy.stats import f as fdist
 from scipy.stats import ttest_ind
 
+import torch
 from torch.autograd import grad
 
 import scipy.optimize
@@ -37,40 +38,56 @@ class InvariantRiskMinimization(object):
         best_reg = 0
         best_err = 1e6
 
-        self._uses_cuda = args["irm_cuda"]
-        if self._uses_cuda and args["verbose"]:
-            print("IRM using cuda")        
-        # if cuda is enabled pass data from all environments to cuda only once
-        self.environments = [(x.data.to("cuda"), y.data.to("cuda")) for x, y in environments] if self._uses_cuda else environments
+        #print(f"CUDA reserved memory (MB) before instantiation : {torch.cuda.memory_reserved() / 1024**2}")        
+        #print(f"CUDA allocated memory (MB) before instantiation : {torch.cuda.memory_allocated() / 1024**2}")        
+        try:
+            self._uses_cuda = args["irm_cuda"]
+            if args["verbose"]:
+                if self._uses_cuda:
+                    print("IRM using cuda")
+                else:
+                    print("IRM on the CPU")
+            # if cuda is enabled pass data from all environments to cuda only once
+            self.environments = [(x.data.to("cuda"), y.data.to("cuda")) for x, y in environments] if self._uses_cuda else environments
+            #print(torch.cuda.memory_summary())
 
-        x_val = environments[-1][0]
-        y_val = environments[-1][1]
+            x_val = self.environments[-1][0]
+            y_val = self.environments[-1][1]
 
-        # TODO : make this a param
-        with open("irm_record.csv", "w", encoding="utf-8") as _irm_record:
-            csv_writer = csv.writer(_irm_record, delimiter=",")
-            header = "iteration, reg, error, penalty".split(", ")
-            csv_writer.writerow(header)
+            # TODO : make this a param
+            with open("irm_record.csv", "w", encoding="utf-8") as _irm_record:
+                csv_writer = csv.writer(_irm_record, delimiter=",")
+                header = "iteration, reg, error, penalty".split(", ")
+                csv_writer.writerow(header)
 
-            # Regularise using the last environment, train with all others
-            regs_ls = [0, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1]
-            _reg_bar = Bar("Regularizing", max=len(regs_ls))
-            for reg in regs_ls:
-                self.train(self.environments[:-1], args, csv_writer=csv_writer, reg=reg)
-                err = (x_val @ self.solution() - y_val).pow(2).mean().item()
+                # Regularise using the last environment, train with all others
+                regs_ls = [0, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1]
+                #_reg_bar = Bar("Regularizing", max=len(regs_ls))
+                for reg in regs_ls:
+                    self.train(self.environments[:-1], args, csv_writer=csv_writer, reg=reg)
+                    err = (x_val @ self._raw_solution() - y_val).pow(2).mean().item()
 
-                if args["verbose"]:
-                    print(
-                        "IRM (reg={:.3f}) has {:.3f} validation error.".format(reg, err)
-                    )
-
-                if err < best_err:
-                    best_err = err
-                    best_reg = reg
-                    best_phi = self.phi.clone()
-                _reg_bar.next()
-            self.phi = best_phi
-            _reg_bar.finish()
+                    if err < best_err:
+                        best_err = err
+                        best_reg = reg
+                        best_phi = self.phi.clone()
+                    #else:
+                    #    del self.phi
+                    #    torch.cuda.empty_cache()
+                    #_reg_bar.next()
+                    if args["verbose"]:
+                        print(
+                            " IRM (reg={:.6f}) has {:.3f} validation error.".format(reg, err)
+                        )
+                self.phi = best_phi
+                #_reg_bar.finish()
+        except Exception as e:
+            raise e
+        finally:
+            del self.environments
+            torch.cuda.empty_cache()
+            #print(f"CUDA reserved memory (MB) after instantiation : {torch.cuda.memory_reserved() / 1024**2}")        
+            #print(f"CUDA allocated memory (MB) after instantiation : {torch.cuda.memory_allocated() / 1024**2}\n\n")        
 
     def train(
         self,
@@ -96,8 +113,6 @@ class InvariantRiskMinimization(object):
             penalty = 0
             error = 0
             for x_e, y_e in environments:
-                #x_e = x_e.data.to('cuda')
-                #y_e = y_e.data.to('cuda')
                 error_e = loss(x_e @ self.phi @ self.w, y_e)
                 penalty += grad(error_e, self.w, create_graph=True)[0].pow(2).mean()
                 error += error_e
@@ -116,10 +131,13 @@ class InvariantRiskMinimization(object):
                 #)
 
     def solution(self):
-        """Get the coefficients"""
+        """Get the coefficients, always on cpu"""
         _coeffs = (self.phi @ self.w).view(-1, 1)
         return _coeffs.data.to('cpu') if self._uses_cuda else _coeffs
 
+    def _raw_solution(self):
+        """ Get the solution without any preprocessing """
+        return (self.phi @ self.w).view(-1, 1)
 
 class InvariantCausalPrediction(object):
     """Direct ICP"""

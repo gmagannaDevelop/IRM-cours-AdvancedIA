@@ -13,7 +13,9 @@ import torch
 
 
 class ChainEquationModel(object):
-    """Create Chain Equation Model"""
+    """Create Chain Equation Model
+    
+    """
 
     def __init__(self, dim, ones=True, scramble=False, hetero=True, hidden=False):
         self.hetero = hetero
