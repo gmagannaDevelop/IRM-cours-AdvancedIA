@@ -123,7 +123,7 @@ class InvariantRiskMinimization(object):
             (reg * error + (1 - reg) * penalty).backward()
             opt.step()
 
-            if args["verbose"] and iteration % args["irm_epoch_size"] == 0:
+            if iteration % args["irm_epoch_size"] == 0:
                 csv_writer.writerow([iteration, reg, error.item(), penalty.item()])
 
     def solution(self):

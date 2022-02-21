@@ -174,4 +174,8 @@ def format_results_df(results_df):
     results_df.loc[:, "Scramble"] = results_df.Scramble.replace(
         {0: "U", 1: "S"}  # Unscrambled, Scrambled
     )
+    results_df.loc[:, "Acronym"] = (
+        results_df.GraphObservation + results_df.Dispersion + results_df.Scramble
+    )
+
     return results_df
