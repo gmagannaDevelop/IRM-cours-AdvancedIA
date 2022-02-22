@@ -1,0 +1,457 @@
+time source varying_environments.fish                                 0 (0.008s) < 11:21:22
+Running IRM simulation from params: {'dim': 10, 'n_samples': 1000, 'n_reps': 10, 'skip_reps': 0, 'seed': 0, 'print_vectors': 1, 'n_iterations': 20000, 'lr': 0.001, 'verbose': 0, 'methods': 'IRM', 'alpha': 0.05, 'env_list': '.15,3.,4.5,2.7,.576', 'setup_sem': 'chain', 'setup_ones': 1, 'setup_hidden': 1, 'setup_hetero': 1, 'setup_scramble': 1, 'n_threads': 8, 'irm_epoch_size': 50, 'irm_cuda': False, 'dump_config': True}
+  0%|                                                                   | 0/10 [00:00<?, ?it/s]/home/gml/Documents/Master/M2_AMI2B/AdvancedAI/projet/IRM-mijn/irm/experiment_synthetic/sem.py:33: UserWarning: torch.qr is deprecated in favor of torch.linalg.qr and will be removed in a future PyTorch release.
+The boolean parameter 'some' has been replaced with a string parameter 'mode'.
+Q, R = torch.qr(A, some)
+should be replaced with
+Q, R = torch.linalg.qr(A, 'reduced' if some else 'complete') (Triggered internally at  ../aten/src/ATen/native/BatchLinearAlgebra.cpp:1937.)
+  self.scramble, _ = torch.qr(torch.randn(dim, dim))
+100%|█████████████████████████████████████████████████████████| 10/10 [00:00<00:00, 281.48it/s]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:27<00:00, 147.39s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:26<00:00, 146.10s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:26<00:00, 146.13s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:25<00:00, 145.81s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:25<00:00, 145.88s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:26<00:00, 146.05s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:26<00:00, 146.06s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:25<00:00, 145.76s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:25<00:00, 145.97s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:25<00:00, 145.79s/method]
+Repetitions: 10environment [24:20, 146.09s/environment]█████| 1/1 [02:25<00:00, 145.79s/method]
+
+________________________________________________________
+Executed in   24.39 mins   fish           external 
+   usr time  194.71 mins  218.00 micros  194.71 mins 
+   sys time    0.16 mins   59.00 micros    0.16 mins 
+
+Running IRM simulation from params: {'dim': 10, 'n_samples': 1000, 'n_reps': 10, 'skip_reps': 0, 'seed': 0, 'print_vectors': 1, 'n_iterations': 20000, 'lr': 0.001, 'verbose': 0, 'methods': 'IRM', 'alpha': 0.05, 'env_list': '3.,4.5,2.7,.576,.15', 'setup_sem': 'chain', 'setup_ones': 1, 'setup_hidden': 1, 'setup_hetero': 1, 'setup_scramble': 1, 'n_threads': 8, 'irm_epoch_size': 50, 'irm_cuda': False, 'dump_config': True}
+  0%|                                                                   | 0/10 [00:00<?, ?it/s]/home/gml/Documents/Master/M2_AMI2B/AdvancedAI/projet/IRM-mijn/irm/experiment_synthetic/sem.py:33: UserWarning: torch.qr is deprecated in favor of torch.linalg.qr and will be removed in a future PyTorch release.
+The boolean parameter 'some' has been replaced with a string parameter 'mode'.
+Q, R = torch.qr(A, some)
+should be replaced with
+Q, R = torch.linalg.qr(A, 'reduced' if some else 'complete') (Triggered internally at  ../aten/src/ATen/native/BatchLinearAlgebra.cpp:1937.)
+  self.scramble, _ = torch.qr(torch.randn(dim, dim))
+100%|█████████████████████████████████████████████████████████| 10/10 [00:00<00:00, 526.40it/s]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:31<00:00, 151.99s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:31<00:00, 151.92s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:31<00:00, 151.67s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:31<00:00, 151.67s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:32<00:00, 152.52s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:29<00:00, 149.14s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:27<00:00, 147.64s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:27<00:00, 147.53s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:27<00:00, 147.37s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:31<00:00, 151.12s/method]
+Repetitions: 10environment [25:02, 150.26s/environment]█████| 1/1 [02:31<00:00, 151.12s/method]
+
+________________________________________________________
+Executed in   25.07 mins   fish           external 
+   usr time  200.25 mins  246.00 micros  200.25 mins 
+   sys time    0.16 mins   66.00 micros    0.16 mins 
+
+Running IRM simulation from params: {'dim': 10, 'n_samples': 1000, 'n_reps': 10, 'skip_reps': 0, 'seed': 0, 'print_vectors': 1, 'n_iterations': 20000, 'lr': 0.001, 'verbose': 0, 'methods': 'IRM', 'alpha': 0.05, 'env_list': '4.5,2.7,.576,.15,3.', 'setup_sem': 'chain', 'setup_ones': 1, 'setup_hidden': 1, 'setup_hetero': 1, 'setup_scramble': 1, 'n_threads': 8, 'irm_epoch_size': 50, 'irm_cuda': False, 'dump_config': True}
+  0%|                                                                   | 0/10 [00:00<?, ?it/s]/home/gml/Documents/Master/M2_AMI2B/AdvancedAI/projet/IRM-mijn/irm/experiment_synthetic/sem.py:33: UserWarning: torch.qr is deprecated in favor of torch.linalg.qr and will be removed in a future PyTorch release.
+The boolean parameter 'some' has been replaced with a string parameter 'mode'.
+Q, R = torch.qr(A, some)
+should be replaced with
+Q, R = torch.linalg.qr(A, 'reduced' if some else 'complete') (Triggered internally at  ../aten/src/ATen/native/BatchLinearAlgebra.cpp:1937.)
+  self.scramble, _ = torch.qr(torch.randn(dim, dim))
+100%|█████████████████████████████████████████████████████████| 10/10 [00:00<00:00, 497.37it/s]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:30<00:00, 150.86s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:31<00:00, 151.51s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:30<00:00, 150.82s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:30<00:00, 150.43s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:31<00:00, 151.52s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:29<00:00, 149.52s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:29<00:00, 149.62s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:30<00:00, 150.06s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:30<00:00, 150.48s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:30<00:00, 150.43s/method]
+Repetitions: 10environment [25:05, 150.53s/environment]█████| 1/1 [02:30<00:00, 150.43s/method]
+
+________________________________________________________
+Executed in   25.12 mins   fish           external 
+   usr time  200.63 mins  297.00 micros  200.63 mins 
+   sys time    0.16 mins    0.00 micros    0.16 mins 
+
+Running IRM simulation from params: {'dim': 10, 'n_samples': 1000, 'n_reps': 10, 'skip_reps': 0, 'seed': 0, 'print_vectors': 1, 'n_iterations': 20000, 'lr': 0.001, 'verbose': 0, 'methods': 'IRM', 'alpha': 0.05, 'env_list': '2.7,.576,.15,3.,4.5', 'setup_sem': 'chain', 'setup_ones': 1, 'setup_hidden': 1, 'setup_hetero': 1, 'setup_scramble': 1, 'n_threads': 8, 'irm_epoch_size': 50, 'irm_cuda': False, 'dump_config': True}
+  0%|                                                                   | 0/10 [00:00<?, ?it/s]/home/gml/Documents/Master/M2_AMI2B/AdvancedAI/projet/IRM-mijn/irm/experiment_synthetic/sem.py:33: UserWarning: torch.qr is deprecated in favor of torch.linalg.qr and will be removed in a future PyTorch release.
+The boolean parameter 'some' has been replaced with a string parameter 'mode'.
+Q, R = torch.qr(A, some)
+should be replaced with
+Q, R = torch.linalg.qr(A, 'reduced' if some else 'complete') (Triggered internally at  ../aten/src/ATen/native/BatchLinearAlgebra.cpp:1937.)
+  self.scramble, _ = torch.qr(torch.randn(dim, dim))
+100%|█████████████████████████████████████████████████████████| 10/10 [00:00<00:00, 554.25it/s]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:27<00:00, 147.80s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:27<00:00, 147.75s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:27<00:00, 147.49s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:27<00:00, 147.75s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:27<00:00, 147.39s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:27<00:00, 147.23s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:27<00:00, 147.26s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:27<00:00, 147.48s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:27<00:00, 147.39s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:27<00:00, 147.68s/method]
+Repetitions: 10environment [24:35, 147.52s/environment]█████| 1/1 [02:27<00:00, 147.68s/method]
+
+________________________________________________________
+Executed in   24.62 mins   fish           external 
+   usr time  196.61 mins  261.00 micros  196.61 mins 
+   sys time    0.16 mins   70.00 micros    0.16 mins 
+
+Running IRM simulation from params: {'dim': 10, 'n_samples': 1000, 'n_reps': 10, 'skip_reps': 0, 'seed': 0, 'print_vectors': 1, 'n_iterations': 20000, 'lr': 0.001, 'verbose': 0, 'methods': 'IRM', 'alpha': 0.05, 'env_list': '.576,.15,3.,4.5,2.7', 'setup_sem': 'chain', 'setup_ones': 1, 'setup_hidden': 1, 'setup_hetero': 1, 'setup_scramble': 1, 'n_threads': 8, 'irm_epoch_size': 50, 'irm_cuda': False, 'dump_config': True}
+  0%|                                                                   | 0/10 [00:00<?, ?it/s]/home/gml/Documents/Master/M2_AMI2B/AdvancedAI/projet/IRM-mijn/irm/experiment_synthetic/sem.py:33: UserWarning: torch.qr is deprecated in favor of torch.linalg.qr and will be removed in a future PyTorch release.
+The boolean parameter 'some' has been replaced with a string parameter 'mode'.
+Q, R = torch.qr(A, some)
+should be replaced with
+Q, R = torch.linalg.qr(A, 'reduced' if some else 'complete') (Triggered internally at  ../aten/src/ATen/native/BatchLinearAlgebra.cpp:1937.)
+  self.scramble, _ = torch.qr(torch.randn(dim, dim))
+100%|█████████████████████████████████████████████████████████| 10/10 [00:00<00:00, 531.62it/s]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:27<00:00, 147.60s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:27<00:00, 147.66s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:27<00:00, 147.52s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:29<00:00, 149.56s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:42<00:00, 162.82s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:56<00:00, 176.92s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [02:58<00:00, 178.67s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [03:09<00:00, 189.41s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [03:18<00:00, 198.34s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [03:15<00:00, 195.56s/method]
+Repetitions: 10environment [28:14, 169.41s/environment]█████| 1/1 [03:15<00:00, 195.56s/method]
+
+________________________________________________________
+Executed in   28.26 mins   fish           external 
+   usr time  224.71 mins  209.00 micros  224.71 mins 
+   sys time    0.21 mins   56.00 micros    0.21 mins 
+
+Running IRM simulation from params: {'dim': 10, 'n_samples': 1000, 'n_reps': 10, 'skip_reps': 0, 'seed': 0, 'print_vectors': 1, 'n_iterations': 20000, 'lr': 0.001, 'verbose': 0, 'methods': 'IRM', 'alpha': 0.05, 'env_list': '.234,3.567,2.432,7.,1.1,1.618033988749', 'setup_sem': 'chain', 'setup_ones': 1, 'setup_hidden': 1, 'setup_hetero': 1, 'setup_scramble': 1, 'n_threads': 8, 'irm_epoch_size': 50, 'irm_cuda': False, 'dump_config': True}
+  0%|                                                                   | 0/10 [00:00<?, ?it/s]/home/gml/Documents/Master/M2_AMI2B/AdvancedAI/projet/IRM-mijn/irm/experiment_synthetic/sem.py:33: UserWarning: torch.qr is deprecated in favor of torch.linalg.qr and will be removed in a future PyTorch release.
+The boolean parameter 'some' has been replaced with a string parameter 'mode'.
+Q, R = torch.qr(A, some)
+should be replaced with
+Q, R = torch.linalg.qr(A, 'reduced' if some else 'complete') (Triggered internally at  ../aten/src/ATen/native/BatchLinearAlgebra.cpp:1937.)
+  self.scramble, _ = torch.qr(torch.randn(dim, dim))
+100%|█████████████████████████████████████████████████████████| 10/10 [00:00<00:00, 110.01it/s]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [03:47<00:00, 227.71s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [03:42<00:00, 222.40s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [03:13<00:00, 193.21s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [03:04<00:00, 184.96s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [03:07<00:00, 187.83s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [03:06<00:00, 186.18s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [03:04<00:00, 184.52s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [03:06<00:00, 186.11s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [03:08<00:00, 188.63s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [03:04<00:00, 184.54s/method]
+Repetitions: 10environment [32:26, 194.61s/environment]█████| 1/1 [03:04<00:00, 184.54s/method]
+
+________________________________________________________
+Executed in   32.47 mins   fish           external 
+   usr time  259.21 mins  405.00 micros  259.21 mins 
+   sys time    0.20 mins    0.00 micros    0.20 mins 
+
+Running IRM simulation from params: {'dim': 10, 'n_samples': 1000, 'n_reps': 10, 'skip_reps': 0, 'seed': 0, 'print_vectors': 1, 'n_iterations': 20000, 'lr': 0.001, 'verbose': 0, 'methods': 'IRM', 'alpha': 0.05, 'env_list': '3.567,2.432,7.,1.1,1.618033988749,.234', 'setup_sem': 'chain', 'setup_ones': 1, 'setup_hidden': 1, 'setup_hetero': 1, 'setup_scramble': 1, 'n_threads': 8, 'irm_epoch_size': 50, 'irm_cuda': False, 'dump_config': True}
+  0%|                                                                   | 0/10 [00:00<?, ?it/s]/home/gml/Documents/Master/M2_AMI2B/AdvancedAI/projet/IRM-mijn/irm/experiment_synthetic/sem.py:33: UserWarning: torch.qr is deprecated in favor of torch.linalg.qr and will be removed in a future PyTorch release.
+The boolean parameter 'some' has been replaced with a string parameter 'mode'.
+Q, R = torch.qr(A, some)
+should be replaced with
+Q, R = torch.linalg.qr(A, 'reduced' if some else 'complete') (Triggered internally at  ../aten/src/ATen/native/BatchLinearAlgebra.cpp:1937.)
+  self.scramble, _ = torch.qr(torch.randn(dim, dim))
+100%|█████████████████████████████████████████████████████████| 10/10 [00:00<00:00, 455.45it/s]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [03:06<00:00, 186.64s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [03:08<00:00, 188.39s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [03:09<00:00, 189.71s/method]
+Methods Loop: 100%|█████████████████████████████████████████| 1/1 [03:05<00:00, 185.82s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:02<00:00, 182.71s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:00<00:00, 180.11s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:01<00:00, 181.86s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:02<00:00, 182.05s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [02:59<00:00, 179.72s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:02<00:00, 182.40s/method]
+Repetitions: 10environment [30:39, 183.94s/environment]███████████████████████████████████████████| 1/1 [03:02<00:00, 182.40s/method]
+
+________________________________________________________
+Executed in   30.69 mins   fish           external 
+   usr time  245.14 mins  266.00 micros  245.14 mins 
+   sys time    0.18 mins   72.00 micros    0.18 mins 
+
+Running IRM simulation from params: {'dim': 10, 'n_samples': 1000, 'n_reps': 10, 'skip_reps': 0, 'seed': 0, 'print_vectors': 1, 'n_iterations': 20000, 'lr': 0.001, 'verbose': 0, 'methods': 'IRM', 'alpha': 0.05, 'env_list': '2.432,7.,1.1,1.618033988749,.234,3.567', 'setup_sem': 'chain', 'setup_ones': 1, 'setup_hidden': 1, 'setup_hetero': 1, 'setup_scramble': 1, 'n_threads': 8, 'irm_epoch_size': 50, 'irm_cuda': False, 'dump_config': True}
+  0%|                                                                                                         | 0/10 [00:00<?, ?it/s]/home/gml/Documents/Master/M2_AMI2B/AdvancedAI/projet/IRM-mijn/irm/experiment_synthetic/sem.py:33: UserWarning: torch.qr is deprecated in favor of torch.linalg.qr and will be removed in a future PyTorch release.
+The boolean parameter 'some' has been replaced with a string parameter 'mode'.
+Q, R = torch.qr(A, some)
+should be replaced with
+Q, R = torch.linalg.qr(A, 'reduced' if some else 'complete') (Triggered internally at  ../aten/src/ATen/native/BatchLinearAlgebra.cpp:1937.)
+  self.scramble, _ = torch.qr(torch.randn(dim, dim))
+100%|███████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:00<00:00, 404.90it/s]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:06<00:00, 186.19s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:07<00:00, 187.49s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:03<00:00, 183.10s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:03<00:00, 183.74s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:02<00:00, 182.34s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:02<00:00, 182.25s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:02<00:00, 182.12s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:02<00:00, 182.36s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:03<00:00, 183.06s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:02<00:00, 182.65s/method]
+Repetitions: 10environment [30:35, 183.53s/environment]███████████████████████████████████████████| 1/1 [03:02<00:00, 182.65s/method]
+
+________________________________________________________
+Executed in   30.62 mins   fish           external 
+   usr time  244.57 mins  238.00 micros  244.57 mins 
+   sys time    0.19 mins   64.00 micros    0.19 mins 
+
+Running IRM simulation from params: {'dim': 10, 'n_samples': 1000, 'n_reps': 10, 'skip_reps': 0, 'seed': 0, 'print_vectors': 1, 'n_iterations': 20000, 'lr': 0.001, 'verbose': 0, 'methods': 'IRM', 'alpha': 0.05, 'env_list': '7.,1.1,1.618033988749,.234,3.567,2.432', 'setup_sem': 'chain', 'setup_ones': 1, 'setup_hidden': 1, 'setup_hetero': 1, 'setup_scramble': 1, 'n_threads': 8, 'irm_epoch_size': 50, 'irm_cuda': False, 'dump_config': True}
+  0%|                                                                                                         | 0/10 [00:00<?, ?it/s]/home/gml/Documents/Master/M2_AMI2B/AdvancedAI/projet/IRM-mijn/irm/experiment_synthetic/sem.py:33: UserWarning: torch.qr is deprecated in favor of torch.linalg.qr and will be removed in a future PyTorch release.
+The boolean parameter 'some' has been replaced with a string parameter 'mode'.
+Q, R = torch.qr(A, some)
+should be replaced with
+Q, R = torch.linalg.qr(A, 'reduced' if some else 'complete') (Triggered internally at  ../aten/src/ATen/native/BatchLinearAlgebra.cpp:1937.)
+  self.scramble, _ = torch.qr(torch.randn(dim, dim))
+100%|███████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:00<00:00, 470.26it/s]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:02<00:00, 182.81s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:02<00:00, 182.27s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:01<00:00, 181.37s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:01<00:00, 181.46s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:00<00:00, 180.81s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:00<00:00, 180.25s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:10<00:00, 190.17s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:04<00:00, 184.49s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:03<00:00, 183.81s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:26<00:00, 206.61s/method]
+Repetitions: 10environment [30:54, 185.41s/environment]███████████████████████████████████████████| 1/1 [03:26<00:00, 206.61s/method]
+
+________________________________________________________
+Executed in   30.93 mins   fish           external 
+   usr time  247.02 mins  234.00 micros  247.02 mins 
+   sys time    0.20 mins   63.00 micros    0.20 mins 
+
+Running IRM simulation from params: {'dim': 10, 'n_samples': 1000, 'n_reps': 10, 'skip_reps': 0, 'seed': 0, 'print_vectors': 1, 'n_iterations': 20000, 'lr': 0.001, 'verbose': 0, 'methods': 'IRM', 'alpha': 0.05, 'env_list': '1.1,1.618033988749,.234,3.567,2.432,7.', 'setup_sem': 'chain', 'setup_ones': 1, 'setup_hidden': 1, 'setup_hetero': 1, 'setup_scramble': 1, 'n_threads': 8, 'irm_epoch_size': 50, 'irm_cuda': False, 'dump_config': True}
+  0%|                                                                                                         | 0/10 [00:00<?, ?it/s]/home/gml/Documents/Master/M2_AMI2B/AdvancedAI/projet/IRM-mijn/irm/experiment_synthetic/sem.py:33: UserWarning: torch.qr is deprecated in favor of torch.linalg.qr and will be removed in a future PyTorch release.
+The boolean parameter 'some' has been replaced with a string parameter 'mode'.
+Q, R = torch.qr(A, some)
+should be replaced with
+Q, R = torch.linalg.qr(A, 'reduced' if some else 'complete') (Triggered internally at  ../aten/src/ATen/native/BatchLinearAlgebra.cpp:1937.)
+  self.scramble, _ = torch.qr(torch.randn(dim, dim))
+100%|███████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:00<00:00, 393.84it/s]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:12<00:00, 192.73s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:08<00:00, 188.73s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:07<00:00, 187.08s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:08<00:00, 188.71s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:14<00:00, 194.53s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:10<00:00, 190.52s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:24<00:00, 204.83s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:26<00:00, 206.41s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:47<00:00, 227.95s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:47<00:00, 227.24s/method]
+Repetitions: 10environment [33:28, 200.87s/environment]███████████████████████████████████████████| 1/1 [03:47<00:00, 227.24s/method]
+
+________________________________________________________
+Executed in   33.51 mins   fish           external 
+   usr time  266.84 mins  272.00 micros  266.84 mins 
+   sys time    0.27 mins    0.00 micros    0.27 mins 
+
+Running IRM simulation from params: {'dim': 10, 'n_samples': 1000, 'n_reps': 10, 'skip_reps': 0, 'seed': 0, 'print_vectors': 1, 'n_iterations': 20000, 'lr': 0.001, 'verbose': 0, 'methods': 'IRM', 'alpha': 0.05, 'env_list': '1.618033988749,.234,3.567,2.432,7.,1.1', 'setup_sem': 'chain', 'setup_ones': 1, 'setup_hidden': 1, 'setup_hetero': 1, 'setup_scramble': 1, 'n_threads': 8, 'irm_epoch_size': 50, 'irm_cuda': False, 'dump_config': True}
+  0%|                                                                                                         | 0/10 [00:00<?, ?it/s]/home/gml/Documents/Master/M2_AMI2B/AdvancedAI/projet/IRM-mijn/irm/experiment_synthetic/sem.py:33: UserWarning: torch.qr is deprecated in favor of torch.linalg.qr and will be removed in a future PyTorch release.
+The boolean parameter 'some' has been replaced with a string parameter 'mode'.
+Q, R = torch.qr(A, some)
+should be replaced with
+Q, R = torch.linalg.qr(A, 'reduced' if some else 'complete') (Triggered internally at  ../aten/src/ATen/native/BatchLinearAlgebra.cpp:1937.)
+  self.scramble, _ = torch.qr(torch.randn(dim, dim))
+100%|████████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:00<00:00, 98.44it/s]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:55<00:00, 235.74s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [04:06<00:00, 246.76s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:40<00:00, 220.90s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:39<00:00, 219.13s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:34<00:00, 214.68s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:33<00:00, 213.83s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:14<00:00, 194.51s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:17<00:00, 197.73s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:25<00:00, 205.57s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:16<00:00, 196.74s/method]
+Repetitions: 10environment [35:45, 214.56s/environment]███████████████████████████████████████████| 1/1 [03:16<00:00, 196.74s/method]
+
+________________________________________________________
+Executed in   35.80 mins   fish           external 
+   usr time  284.80 mins  241.00 micros  284.80 mins 
+   sys time    0.29 mins   61.00 micros    0.29 mins 
+
+Running IRM simulation from params: {'dim': 10, 'n_samples': 1000, 'n_reps': 10, 'skip_reps': 0, 'seed': 0, 'print_vectors': 1, 'n_iterations': 20000, 'lr': 0.001, 'verbose': 0, 'methods': 'IRM', 'alpha': 0.05, 'env_list': '2.34,5.673,4.322,.7,3.14159265,1.618033988749,.05', 'setup_sem': 'chain', 'setup_ones': 1, 'setup_hidden': 1, 'setup_hetero': 1, 'setup_scramble': 1, 'n_threads': 8, 'irm_epoch_size': 50, 'irm_cuda': False, 'dump_config': True}
+  0%|                                                                                                         | 0/10 [00:00<?, ?it/s]/home/gml/Documents/Master/M2_AMI2B/AdvancedAI/projet/IRM-mijn/irm/experiment_synthetic/sem.py:33: UserWarning: torch.qr is deprecated in favor of torch.linalg.qr and will be removed in a future PyTorch release.
+The boolean parameter 'some' has been replaced with a string parameter 'mode'.
+Q, R = torch.qr(A, some)
+should be replaced with
+Q, R = torch.linalg.qr(A, 'reduced' if some else 'complete') (Triggered internally at  ../aten/src/ATen/native/BatchLinearAlgebra.cpp:1937.)
+  self.scramble, _ = torch.qr(torch.randn(dim, dim))
+100%|███████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:00<00:00, 317.24it/s]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:54<00:00, 234.93s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:52<00:00, 232.65s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:48<00:00, 228.28s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:41<00:00, 221.85s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:43<00:00, 223.68s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:38<00:00, 218.74s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:35<00:00, 215.70s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:36<00:00, 216.61s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:37<00:00, 217.93s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:36<00:00, 216.39s/method]
+Repetitions: 10environment [37:06, 222.68s/environment]███████████████████████████████████████████| 1/1 [03:36<00:00, 216.39s/method]
+
+________________________________________________________
+Executed in   37.15 mins   fish           external 
+   usr time  296.40 mins    0.00 micros  296.40 mins 
+   sys time    0.26 mins  283.00 micros    0.26 mins 
+
+Running IRM simulation from params: {'dim': 10, 'n_samples': 1000, 'n_reps': 10, 'skip_reps': 0, 'seed': 0, 'print_vectors': 1, 'n_iterations': 20000, 'lr': 0.001, 'verbose': 0, 'methods': 'IRM', 'alpha': 0.05, 'env_list': '5.673,4.322,.7,3.14159265,1.618033988749,.05,2.34', 'setup_sem': 'chain', 'setup_ones': 1, 'setup_hidden': 1, 'setup_hetero': 1, 'setup_scramble': 1, 'n_threads': 8, 'irm_epoch_size': 50, 'irm_cuda': False, 'dump_config': True}
+  0%|                                                                                                         | 0/10 [00:00<?, ?it/s]/home/gml/Documents/Master/M2_AMI2B/AdvancedAI/projet/IRM-mijn/irm/experiment_synthetic/sem.py:33: UserWarning: torch.qr is deprecated in favor of torch.linalg.qr and will be removed in a future PyTorch release.
+The boolean parameter 'some' has been replaced with a string parameter 'mode'.
+Q, R = torch.qr(A, some)
+should be replaced with
+Q, R = torch.linalg.qr(A, 'reduced' if some else 'complete') (Triggered internally at  ../aten/src/ATen/native/BatchLinearAlgebra.cpp:1937.)
+  self.scramble, _ = torch.qr(torch.randn(dim, dim))
+100%|███████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:00<00:00, 395.85it/s]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [04:30<00:00, 270.51s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [04:47<00:00, 287.95s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [04:01<00:00, 241.81s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [04:06<00:00, 246.32s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [04:09<00:00, 249.52s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:59<00:00, 239.37s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [04:04<00:00, 244.41s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:56<00:00, 236.76s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:55<00:00, 235.20s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [04:01<00:00, 241.37s/method]
+Repetitions: 10environment [41:33, 249.32s/environment]███████████████████████████████████████████| 1/1 [04:01<00:00, 241.37s/method]
+
+________________________________________________________
+Executed in   41.58 mins   fish           external 
+   usr time  331.13 mins  260.00 micros  331.13 mins 
+   sys time    0.33 mins   71.00 micros    0.33 mins 
+
+Running IRM simulation from params: {'dim': 10, 'n_samples': 1000, 'n_reps': 10, 'skip_reps': 0, 'seed': 0, 'print_vectors': 1, 'n_iterations': 20000, 'lr': 0.001, 'verbose': 0, 'methods': 'IRM', 'alpha': 0.05, 'env_list': '4.322,.7,3.14159265,1.618033988749,.05,2.34,5.673', 'setup_sem': 'chain', 'setup_ones': 1, 'setup_hidden': 1, 'setup_hetero': 1, 'setup_scramble': 1, 'n_threads': 8, 'irm_epoch_size': 50, 'irm_cuda': False, 'dump_config': True}
+  0%|                                                                                                         | 0/10 [00:00<?, ?it/s]/home/gml/Documents/Master/M2_AMI2B/AdvancedAI/projet/IRM-mijn/irm/experiment_synthetic/sem.py:33: UserWarning: torch.qr is deprecated in favor of torch.linalg.qr and will be removed in a future PyTorch release.
+The boolean parameter 'some' has been replaced with a string parameter 'mode'.
+Q, R = torch.qr(A, some)
+should be replaced with
+Q, R = torch.linalg.qr(A, 'reduced' if some else 'complete') (Triggered internally at  ../aten/src/ATen/native/BatchLinearAlgebra.cpp:1937.)
+  self.scramble, _ = torch.qr(torch.randn(dim, dim))
+100%|███████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:00<00:00, 389.89it/s]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:51<00:00, 231.38s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:50<00:00, 230.28s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:59<00:00, 239.71s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [04:06<00:00, 246.89s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [04:10<00:00, 250.54s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:51<00:00, 231.79s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:56<00:00, 236.33s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [04:12<00:00, 252.05s/method]
+Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [04:04<00:00, 244.45s/method]
+Repetitions: 9environment [36:03, 243.32s/environment]████████████████████████████████████████████| 1/1 [04:04<00:00, 244.45s/method]
+Methods Loop: 100%|███████████████████████████████████████████████Methods Loop: 100%|███████████████████████████████████████████████████████████████████████████████| 1/1 [03:56<00:00, 236.86s/method]
+Repetitions: 10environment [40:00, 240.03s/environment]
+
+________________________________________________________
+Executed in   40.03 mins   fish           external 
+   usr time  319.58 mins  341.00 micros  319.58 mins 
+   sys time    0.31 mins    0.00 micros    0.31 mins 
+
+Running IRM simulation from params: {'dim': 10, 'n_samples': 1000, 'n_reps': 10, 'skip_reps': 0, 'seed': 0, 'print_vectors': 1, 'n_iterations': 20000, 'lr': 0.001, 'verbose': 0, 'methods': 'IRM', 'alpha': 0.05, 'env_list': '.7,3.14159265,1.618033988749,.05,2.34,5.673,4.322', 'setup_sem': 'chain', 'setup_ones': 1, 'setup_hidden': 1, 'setup_hetero': 1, 'setup_scramble': 1, 'n_threads': 8, 'irm_epoch_size': 50, 'irm_cuda': False, 'dump_config': True}
+  0%|                                      | 0/10 [00:00<?, ?it/s]/home/gml/Documents/Master/M2_AMI2B/AdvancedAI/projet/IRM-mijn/irm/experiment_synthetic/sem.py:33: UserWarning: torch.qr is deprecated in favor of torch.linalg.qr and will be removed in a future PyTorch release.
+The boolean parameter 'some' has been replaced with a string parameter 'mode'.
+Q, R = torch.qr(A, some)
+should be replaced with
+Q, R = torch.linalg.qr(A, 'reduced' if some else 'complete') (Triggered internally at  ../aten/src/ATen/native/BatchLinearAlgebra.cpp:1937.)
+  self.scramble, _ = torch.qr(torch.randn(dim, dim))
+100%|████████████████████████████| 10/10 [00:00<00:00, 150.48it/s]
+Methods Loop: 100%|████████████| 1/1 [04:00<00:00, 240.37s/method]
+Methods Loop: 100%|████████████| 1/1 [03:52<00:00, 232.39s/method]
+Methods Loop: 100%|████████████| 1/1 [03:50<00:00, 230.20s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:45<00:00, 225.76s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:54<00:00, 234.91s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:56<00:00, 236.10s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:50<00:00, 230.28s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:51<00:00, 231.04s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:55<00:00, 235.42s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:51<00:00, 231.09s/method]
+Repetitions: 10environment [38:47, 232.76s/environment]1.09s/method]
+
+________________________________________________________
+Executed in   38.83 mins   fish           external 
+   usr time  310.00 mins  258.00 micros  310.00 mins 
+   sys time    0.28 mins   71.00 micros    0.28 mins 
+
+Running IRM simulation from params: {'dim': 10, 'n_samples': 1000, 'n_reps': 10, 'skip_reps': 0, 'seed': 0, 'print_vectors': 1, 'n_iterations': 20000, 'lr': 0.001, 'verbose': 0, 'methods': 'IRM', 'alpha': 0.05, 'env_list': '3.14159265,1.618033988749,.05,2.34,5.673,4.322,.7', 'setup_sem': 'chain', 'setup_ones': 1, 'setup_hidden': 1, 'setup_hetero': 1, 'setup_scramble': 1, 'n_threads': 8, 'irm_epoch_size': 50, 'irm_cuda': False, 'dump_config': True}
+  0%|                                        | 0/10 [00:00<?, ?it/s]/home/gml/Documents/Master/M2_AMI2B/AdvancedAI/projet/IRM-mijn/irm/experiment_synthetic/sem.py:33: UserWarning: torch.qr is deprecated in favor of torch.linalg.qr and will be removed in a future PyTorch release.
+The boolean parameter 'some' has been replaced with a string parameter 'mode'.
+Q, R = torch.qr(A, some)
+should be replaced with
+Q, R = torch.linalg.qr(A, 'reduced' if some else 'complete') (Triggered internally at  ../aten/src/ATen/native/BatchLinearAlgebra.cpp:1937.)
+  self.scramble, _ = torch.qr(torch.randn(dim, dim))
+100%|██████████████████████████████| 10/10 [00:00<00:00, 277.47it/s]
+Methods Loop: 100%|██████████████| 1/1 [03:46<00:00, 226.47s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:49<00:00, 229.55s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:52<00:00, 232.64s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:53<00:00, 233.03s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:50<00:00, 230.67s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:46<00:00, 226.85s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:44<00:00, 224.78s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:36<00:00, 216.56s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:38<00:00, 218.18s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:39<00:00, 219.49s/method]
+Repetitions: 10environment [37:38, 225.82s/environment]9.49s/method]
+
+________________________________________________________
+Executed in   37.67 mins   fish           external 
+   usr time  300.74 mins  286.00 micros  300.74 mins 
+   sys time    0.27 mins    0.00 micros    0.27 mins 
+
+Running IRM simulation from params: {'dim': 10, 'n_samples': 1000, 'n_reps': 10, 'skip_reps': 0, 'seed': 0, 'print_vectors': 1, 'n_iterations': 20000, 'lr': 0.001, 'verbose': 0, 'methods': 'IRM', 'alpha': 0.05, 'env_list': '1.618033988749,.05,2.34,5.673,4.322,.7,3.14159265', 'setup_sem': 'chain', 'setup_ones': 1, 'setup_hidden': 1, 'setup_hetero': 1, 'setup_scramble': 1, 'n_threads': 8, 'irm_epoch_size': 50, 'irm_cuda': False, 'dump_config': True}
+  0%|                                        | 0/10 [00:00<?, ?it/s]/home/gml/Documents/Master/M2_AMI2B/AdvancedAI/projet/IRM-mijn/irm/experiment_synthetic/sem.py:33: UserWarning: torch.qr is deprecated in favor of torch.linalg.qr and will be removed in a future PyTorch release.
+The boolean parameter 'some' has been replaced with a string parameter 'mode'.
+Q, R = torch.qr(A, some)
+should be replaced with
+Q, R = torch.linalg.qr(A, 'reduced' if some else 'complete') (Triggered internally at  ../aten/src/ATen/native/BatchLinearAlgebra.cpp:1937.)
+  self.scramble, _ = torch.qr(torch.randn(dim, dim))
+100%|██████████████████████████████| 10/10 [00:00<00:00, 412.52it/s]
+Methods Loop: 100%|██████████████| 1/1 [03:39<00:00, 219.40s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:37<00:00, 217.40s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:39<00:00, 219.65s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:41<00:00, 221.19s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:38<00:00, 218.87s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:35<00:00, 215.57s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:36<00:00, 216.98s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:37<00:00, 217.90s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:41<00:00, 221.55s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:39<00:00, 219.71s/method]
+Repetitions: 10environment [36:28, 218.82s/environment]9.71s/method]
+
+________________________________________________________
+Executed in   36.50 mins   fish           external 
+   usr time  291.56 mins  307.00 micros  291.56 mins 
+   sys time    0.25 mins    0.00 micros    0.25 mins 
+
+Running IRM simulation from params: {'dim': 10, 'n_samples': 1000, 'n_reps': 10, 'skip_reps': 0, 'seed': 0, 'print_vectors': 1, 'n_iterations': 20000, 'lr': 0.001, 'verbose': 0, 'methods': 'IRM', 'alpha': 0.05, 'env_list': '.05,2.34,5.673,4.322,.7,3.14159265,1.618033988749', 'setup_sem': 'chain', 'setup_ones': 1, 'setup_hidden': 1, 'setup_hetero': 1, 'setup_scramble': 1, 'n_threads': 8, 'irm_epoch_size': 50, 'irm_cuda': False, 'dump_config': True}
+  0%|                                        | 0/10 [00:00<?, ?it/s]/home/gml/Documents/Master/M2_AMI2B/AdvancedAI/projet/IRM-mijn/irm/experiment_synthetic/sem.py:33: UserWarning: torch.qr is deprecated in favor of torch.linalg.qr and will be removed in a future PyTorch release.
+The boolean parameter 'some' has been replaced with a string parameter 'mode'.
+Q, R = torch.qr(A, some)
+should be replaced with
+Q, R = torch.linalg.qr(A, 'reduced' if some else 'complete') (Triggered internally at  ../aten/src/ATen/native/BatchLinearAlgebra.cpp:1937.)
+  self.scramble, _ = torch.qr(torch.randn(dim, dim))
+100%|██████████████████████████████| 10/10 [00:00<00:00, 416.15it/s]
+Methods Loop: 100%|██████████████| 1/1 [03:35<00:00, 215.99s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:35<00:00, 215.89s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:39<00:00, 219.46s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:41<00:00, 221.55s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:35<00:00, 215.51s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:29<00:00, 209.87s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:29<00:00, 209.53s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:37<00:00, 217.46s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:40<00:00, 220.36s/method]
+Methods Loop: 100%|██████████████| 1/1 [03:34<00:00, 214.90s/method]
+Repetitions: 10environment [36:00, 216.05s/environment]4.90s/method]
+
+________________________________________________________
+Executed in   36.04 mins   fish           external 
+   usr time  287.85 mins  341.00 micros  287.85 mins 
+   sys time    0.24 mins    0.00 micros    0.24 mins 
+
+
+________________________________________________________
+Executed in  589.27 mins   fish           external 
+   usr time  4701.75 mins   44.84 millis  4701.75 mins 
+   sys time    4.15 mins   14.58 millis    4.15 mins 
