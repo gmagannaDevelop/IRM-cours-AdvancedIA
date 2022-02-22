@@ -11,7 +11,6 @@ import torch
 import numpy
 import pandas as pd
 
-from progress.spinner import PixelSpinner
 from tqdm import tqdm
 
 from .sem import ChainEquationModel
@@ -26,7 +25,8 @@ def vector_to_dict(vector):
 
 
 def errors(w, w_hat):
-    """Compute errors"""
+    """Compute errors
+    return causal and non-causal"""
     w = w.view(-1)
     w_hat = w_hat.view(-1)
 
@@ -86,8 +86,7 @@ def run_experiment(args):
     all_solutions = []
     all_environments = []
 
-    _bar = Bar("Creating SEMs", max=args["n_reps"])
-    for rep_i in range(args["n_reps"]):
+    for rep_i in tqdm(range(args["n_reps"])):
         if args["setup_sem"] == "chain":
             sem = ChainEquationModel(
                 args["dim"],
@@ -104,19 +103,21 @@ def run_experiment(args):
 
         all_sems.append(sem)
         all_environments.append(environments)
-        _bar.next()
-    _bar.finish()
 
     # TODO : save parameter estimations
     # For an explanation of the names given to columns, see the article
     # section 5.1 Synthetic Data
     results_df = pd.DataFrame(
-        columns="Coefficients,GraphObservation,Dispersion,Scramble,Method,ErrCausal,ErrNonCausal".split(
-            ","
-        ),
-        index=list(range(len(all_sems) * len(methods))),
+        columns=[
+            *"Coefficients,GraphObservation,Dispersion,Scramble,Method,ErrCausal,ErrNonCausal".split(
+                ","
+            ),
+            *[f"X{ii+1}" for ii in range(args["dim"])],
+        ],
+        index=list(range(len(all_sems) * len(methods) + len(all_sems))),
     )
     i = 0
+
     try:
         for sem, environments in tqdm(
             zip(all_sems, all_environments),
@@ -124,6 +125,18 @@ def run_experiment(args):
             unit="environment",
         ):
             sem_solution, sem_scramble = sem.solution()
+            # Save the solution before saving the methods
+            results_df.loc[i, :] = (
+                *map(
+                    lambda x: x.split("=", maxsplit=1)[-1],
+                    setup_str.split(_SETUP_STR_SEPARATOR),
+                ),
+                "SEM",
+                0.0,
+                0.0,
+                *sem_solution.view(-1).tolist(),
+            )
+            i += 1
             for method_name, method_constructor in tqdm(
                 methods.items(), desc="Methods Loop", unit="method"
             ):
@@ -138,7 +151,6 @@ def run_experiment(args):
                 err_causal, err_noncausal = errors(sem_solution, method_solution)
 
                 # TODO : save parameter estimations
-                #        pretty(method_solution),
                 results_df.loc[i, :] = (
                     *map(
                         lambda x: x.split("=", maxsplit=1)[-1],
@@ -147,6 +159,7 @@ def run_experiment(args):
                     method_name,
                     err_causal,
                     err_noncausal,
+                    *method_solution.view(-1).tolist(),
                 )
                 i += 1
 
