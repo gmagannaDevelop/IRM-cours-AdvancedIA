@@ -3,8 +3,8 @@
 # in the original paper
 set setup_ones 1
 set setup_hidden 0 1
-set setup_scramble 0 1
-set setup_hetero 0 1
+set setup_scramble 1 0
+set setup_hetero 1 0
 
 # This cartesian product generates all possible combinations of parameters
 set param_grid $setup_ones'|'$setup_hidden'|'$setup_scramble'|'$setup_hetero
@@ -19,7 +19,6 @@ for param in $param_grid
 	set publish_dir "ones$one:hidden$hidden:scramble$scramble:hetero$hetero"
     mkdir $publish_dir
     cd $publish_dir
-    irm from_params --dump_config --n_threads 16\
-        --setup_ones $one --setup_hidden $hidden --setup_hetero $hetero --setup_scramble $scramble
+    irm from_params --dump_config --n_threads 16 --n_iterations 20000 --irm_epoch_size 100 --setup_ones $one --setup_hidden $hidden --setup_hetero $hetero --setup_scramble $scramble
     cd ..
 end
