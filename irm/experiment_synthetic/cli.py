@@ -72,8 +72,12 @@ Available commands:
         parser.add_argument(
             "--alpha", type=float, default=0.05, help="(float: %(default)f)"
         )
-        parser.add_argument("--env_list", type=str, default=".2,2.,5.")
-        parser.add_argument("--setup_sem", type=str, default="chain")
+        parser.add_argument(
+            "--env_list", type=str, default=".2,2.,5.", help="(str: %(default)s)"
+        )
+        parser.add_argument(
+            "--setup_sem", type=str, default="chain", help="(str: %(default)s)"
+        )
         parser.add_argument(
             "--setup_ones", type=int, default=1, help="(int: %(default)d)"
         )
