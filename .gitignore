@@ -1,8 +1,10 @@
 .vscode
+.*.swp
 
 # temporarily:
 results
-cli_replications
+cli_replications/original_experiments/100k_iterations
+cli_replications/original_experiments/100k_iterations/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
