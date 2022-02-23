@@ -5,6 +5,7 @@
 results
 cli_replications/original_experiments/100k_iterations
 cli_replications/original_experiments/100k_iterations/*
+/**/data
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

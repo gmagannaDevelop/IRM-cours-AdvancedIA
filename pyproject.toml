@@ -6,7 +6,6 @@ authors = ["Gustavo Magaña López <28574085+gmagannaDevelop@users.noreply.githu
 
 [tool.poetry.dependencies]
 python = "^3.8"
-jax = "^0.2.28"
 torch = "^1.10.2"
 toml = "^0.10.2"
 scikit-learn = "^1.0.2"
