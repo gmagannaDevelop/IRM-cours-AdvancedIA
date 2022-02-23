@@ -24,7 +24,6 @@ import scipy.optimize
 import matplotlib
 import matplotlib.pyplot as plt
 
-from progress.bar import Bar
 
 def pretty(vector):
     """used for printing"""
@@ -39,18 +38,23 @@ class InvariantRiskMinimization(object):
         best_reg = 0
         best_err = 1e6
 
-        #print(f"CUDA reserved memory (MB) before instantiation : {torch.cuda.memory_reserved() / 1024**2}")        
-        #print(f"CUDA allocated memory (MB) before instantiation : {torch.cuda.memory_allocated() / 1024**2}")        
+        # print(f"CUDA reserved memory (MB) before instantiation : {torch.cuda.memory_reserved() / 1024**2}")
+        # print(f"CUDA allocated memory (MB) before instantiation : {torch.cuda.memory_allocated() / 1024**2}")
         try:
             self._uses_cuda = args["irm_cuda"]
+            self._device = "cuda" if self._uses_cuda else "cpu"
             if args["verbose"]:
                 if self._uses_cuda:
                     print("IRM using cuda")
                 else:
                     print("IRM on the CPU")
             # if cuda is enabled pass data from all environments to cuda only once
-            self.environments = [(x.data.to("cuda"), y.data.to("cuda")) for x, y in environments] if self._uses_cuda else environments
-            #print(torch.cuda.memory_summary())
+            self.environments = (
+                [(x.data.to("cuda"), y.data.to("cuda")) for x, y in environments]
+                if self._uses_cuda
+                else environments
+            )
+            # print(torch.cuda.memory_summary())
 
             x_val = self.environments[-1][0]
             y_val = self.environments[-1][1]
@@ -64,32 +68,30 @@ class InvariantRiskMinimization(object):
 
                 # Regularise using the last environment, train with all others
                 regs_ls = [0, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1]
-                #_reg_bar = Bar("Regularizing", max=len(regs_ls))
                 for reg in regs_ls:
-                    self.train(self.environments[:-1], args, csv_writer=csv_writer, reg=reg)
+                    self.train(
+                        self.environments[:-1], args, csv_writer=csv_writer, reg=reg
+                    )
                     err = (x_val @ self._raw_solution() - y_val).pow(2).mean().item()
 
                     if err < best_err:
                         best_err = err
                         best_reg = reg
                         best_phi = self.phi.clone()
-                    #else:
-                    #    del self.phi
-                    #    torch.cuda.empty_cache()
-                    #_reg_bar.next()
                     if args["verbose"]:
                         print(
-                            " IRM (reg={:.6f}) has {:.3f} validation error.".format(reg, err)
+                            " IRM (reg={:.6f}) has {:.3f} validation error.".format(
+                                reg, err
+                            )
                         )
                 self.phi = best_phi
-                #_reg_bar.finish()
         except Exception as e:
             raise e
         finally:
             del self.environments
             torch.cuda.empty_cache()
-            #print(f"CUDA reserved memory (MB) after instantiation : {torch.cuda.memory_reserved() / 1024**2}")        
-            #print(f"CUDA allocated memory (MB) after instantiation : {torch.cuda.memory_allocated() / 1024**2}\n\n")        
+            # print(f"CUDA reserved memory (MB) after instantiation : {torch.cuda.memory_reserved() / 1024**2}")
+            # print(f"CUDA allocated memory (MB) after instantiation : {torch.cuda.memory_allocated() / 1024**2}\n\n")
 
     def train(
         self,
@@ -101,12 +103,11 @@ class InvariantRiskMinimization(object):
         """train the IRM model across environments"""
         dim_x = environments[0][0].size(1)
 
-        self.phi = torch.nn.Parameter(torch.eye(dim_x, dim_x), requires_grad=True)
-        self.w = torch.ones(dim_x, 1)
+        self.phi = torch.nn.Parameter(
+            torch.eye(dim_x, dim_x, device=self._device), requires_grad=True
+        )
+        self.w = torch.ones(dim_x, 1, device=self._device)
         self.w.requires_grad = True
-        if self._uses_cuda:
-            self.phi = self.phi.data.to('cuda')
-            self.w = self.w.to('cuda')
 
         opt = torch.optim.Adam([self.phi], lr=args["lr"])
         loss = torch.nn.MSELoss()
@@ -129,11 +130,12 @@ class InvariantRiskMinimization(object):
     def solution(self):
         """Get the coefficients, always on cpu"""
         _coeffs = (self.phi @ self.w).view(-1, 1)
-        return _coeffs.data.to('cpu') if self._uses_cuda else _coeffs
+        return _coeffs.data.to("cpu") if self._uses_cuda else _coeffs
 
     def _raw_solution(self):
-        """ Get the solution without any preprocessing """
+        """Get the solution without any preprocessing"""
         return (self.phi @ self.w).view(-1, 1)
+
 
 class InvariantCausalPrediction(object):
     """Direct ICP"""
